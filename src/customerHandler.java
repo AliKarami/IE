@@ -6,5 +6,7 @@ import ir.ramtung.coolserver.*;
 import java.io.*;
 import java.util.*;
 import com.sun.net.httpserver.*;
-abstract class customerHandler implements ServiceHandler {
+
+public abstract class customerHandler extends ServiceHandler {
+
 }
