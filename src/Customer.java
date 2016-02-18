@@ -12,6 +12,7 @@ public class Customer {
 	String name;
 	String family;
 	int fund;
+
 	List<Request> done;
 	List<Request> refused;
 	List<Request> inAct;
