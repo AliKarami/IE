@@ -21,4 +21,8 @@ public class Database {
         list.add(newcstmr);
         return true;
     }
+
+    public boolean deposit_customer(int id_,int amount){
+
+    }
 }
