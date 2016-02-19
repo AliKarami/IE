@@ -10,7 +10,6 @@ public abstract class OrderHandler extends ServiceHandler  {
 
 		protected Database db;
 
-
 	    public abstract void execute(PrintWriter out) throws IOException;
 
 	    public void handle(HttpExchange t) throws IOException {

@@ -5,16 +5,18 @@ import ir.ramtung.coolserver.*;
 
 
 public class Database {
-	Vector<Customer> list = new Vector<Customer>();
+	private Vector<Customer> list = new Vector<Customer>();
+    private Vector<Symbol> symbs = new Vector<Symbol>();
+
 
     Database() {
-        Customer Admin = new Customer(1,"admin","admin");
+        Customer Admin = new Customer(1,"admin","");
         list.add(Admin);
     }
 
-    private Customer get_user(int id){
+    public Customer get_user(int id_){
         for (Customer cstmr : list) {
-            if (cstmr.id == id)
+            if (cstmr.id == id_)
                 return cstmr;
         }
         return null;
@@ -51,5 +53,32 @@ public class Database {
             }
         }
         return -2; //Unknown user id
+    }
+
+    public Symbol get_symbol(String name_) {
+        for (Symbol sym : symbs) {
+            if (sym.name.equals(name_))
+                return sym;
+        }
+        return null;
+    }
+
+    public String sell_gtc(int id_,String name_,int price_,int quantity_) {
+        Customer seller = get_user(id_);
+        Symbol stock = get_symbol(name_);
+        Request req = new Request(seller,stock,"GTC",true,quantity_,price_);
+        if (seller == null)
+            return "Unknown user id";
+        else if (seller.property.get(name_) < quantity_) {
+            seller.refused.add(req);
+            return "Not enough share";
+        }
+        else if (stock == null)
+            return "Invalid symbol id";
+        else {
+            stock.add_sellReq(req);
+
+        }
+        return "404 Error!"; //pass default 404 error....
     }
 }

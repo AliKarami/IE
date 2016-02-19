@@ -2,7 +2,6 @@ package ir.ramtung.coolserver;
 
 import java.io.*;
 import java.util.*;
-import com.sun.net.httpserver.*;
 
 public class Page {
     public Page(String filename) {

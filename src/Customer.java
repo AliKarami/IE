@@ -3,11 +3,6 @@ import java.net.*;
 import java.util.*;
 import ir.ramtung.coolserver.*;
 
-class Request{
-	Symbol sym;
-	int operator;//kind of request
-}
-
 public class Customer {
 	int id;
 	String name;

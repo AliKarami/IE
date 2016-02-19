@@ -9,7 +9,24 @@ class Sell extends OrderHandler {
         db = db_;
     }
     public void execute(PrintWriter out) {
-       
+        if (!(params.containsKey("id") && params.containsKey("instrument") && params.containsKey("price") && params.containsKey("quantity") && params.containsKey("type"))) {
+            //pass 404 error...
+            out.println("404 Error!");
+        } else {
+            switch (params.get("type")) {
+                case "GTC":
+
+                    break;
+                case "IOC":
+
+                    break;
+                case "MPO":
+
+                    break;
+                default:
+                    out.println("Invalid type");
+            }
+        }
     }
 }
 
@@ -27,10 +44,9 @@ class Add extends CustomerHandler {
         db = db_;
     }
 	public void execute(PrintWriter out) {
-        System.out.println(params);
         if ( !(params.containsKey("id") && params.containsKey("name") && params.containsKey("family"))) {
             //pass 404 error...
-            out.println("salam");
+            out.println("404 Error!");
         }
         else {
             if (db.add_customer(Integer.parseInt(params.get("id")),params.get("name"),params.get("family"))) {
@@ -50,6 +66,7 @@ class Deposit extends CustomerHandler {
 	public void execute(PrintWriter out) {
         if (!(params.containsKey("id") && params.containsKey("amount"))) {
             //pass 404 error...
+            out.println("404 Error!");
         }
         else {
             if (db.deposit_customer(Integer.parseInt(params.get("id")),Integer.parseInt(params.get("amount")))) {
@@ -69,6 +86,7 @@ class Withdraw extends CustomerHandler {
 	public void execute(PrintWriter out) {
         if (!(params.containsKey("id") && params.containsKey("amount"))) {
             //pass 404 error...
+            out.println("404 Error!");
         }
         else {
             switch (db.withdraw_customer(Integer.parseInt(params.get("id")),Integer.parseInt(params.get("amount")))) {
