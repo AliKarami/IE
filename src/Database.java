@@ -87,7 +87,7 @@ public class Database {
         else if (stock == null)
             return "Invalid symbol id";
         else {
-            return ""; // <<<<  stock.add_sellReqIOC(req);
+            return stock.add_sellReqMPO(req);
         }
     }
 
