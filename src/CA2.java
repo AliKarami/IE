@@ -15,7 +15,7 @@ class Sell extends OrderHandler {
         } else {
             switch (params.get("type")) {
                 case "GTC":
-
+                    out.println(db.sell_gtc(Integer.parseInt(params.get("id")),params.get("instrument"),Integer.parseInt(params.get("price")),Integer.parseInt(params.get("quantity"))));
                     break;
                 case "IOC":
 

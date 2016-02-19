@@ -76,9 +76,8 @@ public class Database {
         else if (stock == null)
             return "Invalid symbol id";
         else {
-            stock.add_sellReq(req);
-
+            seller.inAct.add(req);
+            return stock.add_sellReqGTC(req);
         }
-        return "404 Error!"; //pass default 404 error....
     }
 }
