@@ -21,13 +21,17 @@ public abstract class ServiceHandler implements HttpHandler {
     public abstract void execute(PrintWriter out) throws IOException;
 
     public void handle(HttpExchange t) throws IOException {
+        System.out.println("1");
         extractParams(t.getRequestURI().getQuery());
+        System.out.println("2");
 
         StringWriter sw = new StringWriter();
         execute(new PrintWriter(sw, true /*autoflush*/));
+        System.out.println("3");
         byte[] result = sw.toString().getBytes();
         
         t.sendResponseHeaders(200, result.length);
+        System.out.println("4");
         Headers headers = t.getResponseHeaders();
         headers.add("Date", Calendar.getInstance().getTime().toString());
         headers.add("Content-Type", "text/html");

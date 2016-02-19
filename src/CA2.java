@@ -27,10 +27,14 @@ class Add extends CustomerHandler {
         db = db_;
     }
 	public void execute(PrintWriter out) {
-        if (!(params.containsKey("id") && params.containsKey("name") && params.containsKey("family"))) {
+        System.out.println(params);
+        System.out.println("Abas");
+        if ( !(params.containsKey("id") && params.containsKey("name") && params.containsKey("family"))) {
             //pass 404 error...
+            System.out.println("B");
         }
         else {
+            System.out.println("C");
             if (db.add_customer(Integer.parseInt(params.get("id")),params.get("name"),params.get("family"))) {
                 out.println("New user is added");
             }
@@ -86,15 +90,16 @@ class Withdraw extends CustomerHandler {
 
 public class CA2 {
     static Database db = new Database();
-	
+
 	public static void main(String[] args) {
 		try{
+
             HttpServer server = HttpServer.create(new InetSocketAddress(9091), 0);
 	        server.createContext("/order/sell", new Sell(db));
 	        server.createContext("/order/buy", new Buy(db));
-			server.createContext("/order/add", new Add(db));
-			server.createContext("/order/deposit", new Deposit(db));
-			server.createContext("/order/withdraw", new Withdraw(db));
+			server.createContext("/customer/add", new Add(db));
+			server.createContext("/customer/deposit", new Deposit(db));
+			server.createContext("/customer/withdraw", new Withdraw(db));
 			server.start();
 
 

@@ -5,7 +5,7 @@ import ir.ramtung.coolserver.*;
 
 
 public class Database {
-	Vector<Customer> list;
+	Vector<Customer> list = new Vector<Customer>();
 
     Database() {
         Customer Admin = new Customer(1,"admin","admin");
