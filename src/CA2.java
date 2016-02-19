@@ -27,14 +27,11 @@ class Add extends CustomerHandler {
         db = db_;
     }
 	public void execute(PrintWriter out) {
-        System.out.println(params);
-        System.out.println("Abas");
         if ( !(params.containsKey("id") && params.containsKey("name") && params.containsKey("family"))) {
             //pass 404 error...
-            System.out.println("B");
+
         }
         else {
-            System.out.println("C");
             if (db.add_customer(Integer.parseInt(params.get("id")),params.get("name"),params.get("family"))) {
                 out.println("New user is added");
             }
