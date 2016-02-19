@@ -24,7 +24,5 @@ public class Customer {
 		name = name_;
 		family = family_;
         int fund = 0;
-        if (id == 1)
-            fund = Integer.MAX_VALUE;
 	}
 }

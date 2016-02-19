@@ -21,11 +21,13 @@ public abstract class ServiceHandler implements HttpHandler {
     public abstract void execute(PrintWriter out) throws IOException;
 
     public void handle(HttpExchange t) throws IOException {
+
         extractParams(t.getRequestURI().getQuery());
 
         StringWriter sw = new StringWriter();
-        execute(new PrintWriter(sw, true /*autoflush*/));
+        execute(new PrintWriter(sw, true));
         byte[] result = sw.toString().getBytes();
+
         
         t.sendResponseHeaders(200, result.length);
         Headers headers = t.getResponseHeaders();

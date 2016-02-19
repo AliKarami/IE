@@ -7,7 +7,6 @@ import com.sun.net.httpserver.*;
 
 public abstract class OrderHandler extends ServiceHandler  {
 	
-	 	protected LinkedHashMap<String, String> params =  new LinkedHashMap<String, String>();
 
 		protected Database db;
 

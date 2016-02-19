@@ -9,7 +9,7 @@ import com.sun.net.httpserver.*;
 
 public abstract class CustomerHandler extends ServiceHandler {
 
-        protected LinkedHashMap<String, String> params = new LinkedHashMap<String, String>();
+
         protected Database db;
 
 

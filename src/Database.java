@@ -12,6 +12,14 @@ public class Database {
         list.add(Admin);
     }
 
+    private Customer get_user(int id){
+        for (Customer cstmr : list) {
+            if (cstmr.id == id)
+                return cstmr;
+        }
+        return null;
+    }
+
     public boolean add_customer(int id_,String name_,String family_) {
         for (Customer cstmr : list) {
             if (cstmr.id==id_)
