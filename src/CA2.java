@@ -31,11 +31,11 @@ class Add extends CustomerHandler {
             //pass 404 error...
         }
         else {
-            if (!(db.add_customer(Integer.parseInt(params.get("id")),params.get("name"),params.get("family")))) {
-                out.println("Repeated id");
+            if (db.add_customer(Integer.parseInt(params.get("id")),params.get("name"),params.get("family"))) {
+                out.println("New user is added");
             }
             else {
-                out.println("New user is added");
+                out.println("Repeated id");
             }
         }
 	}
@@ -46,7 +46,17 @@ class Deposit extends CustomerHandler {
         db = db_;
     }
 	public void execute(PrintWriter out) {
-
+        if (!(params.containsKey("id") && params.containsKey("amount"))) {
+            //pass 404 error...
+        }
+        else {
+            if (db.deposit_customer(Integer.parseInt(params.get("id")),Integer.parseInt(params.get("amount")))) {
+                out.println("Successful");
+            }
+            else {
+                out.println("Unknown user id");
+            }
+        }
 	}
 }
 
@@ -55,7 +65,22 @@ class Withdraw extends CustomerHandler {
         db = db_;
     }
 	public void execute(PrintWriter out) {
-
+        if (!(params.containsKey("id") && params.containsKey("amount"))) {
+            //pass 404 error...
+        }
+        else {
+            switch (db.withdraw_customer(Integer.parseInt(params.get("id")),Integer.parseInt(params.get("amount")))) {
+                case 0:
+                    out.println("Successful");
+                    break;
+                case -1:
+                    out.println("Not enough money");
+                    break;
+                case -2:
+                    out.println("Unknown user id");
+                    break;
+            }
+        }
 	}
 }
 

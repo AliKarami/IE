@@ -14,6 +14,7 @@ public class Customer {
 	String family;
 	int fund;
 
+    LinkedHashMap<String,Integer> property;
 	List<Request> done;
 	List<Request> refused;
 	List<Request> inAct;

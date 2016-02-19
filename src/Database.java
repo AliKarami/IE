@@ -23,6 +23,25 @@ public class Database {
     }
 
     public boolean deposit_customer(int id_,int amount){
-
+        for (Customer cstmr : list) {
+            if (cstmr.id==id_) {
+                cstmr.fund += amount;
+                return true;
+            }
+        }
+        return false;
+    }
+    public int withdraw_customer(int id_,int amount) {
+        for (Customer cstmr : list) {
+            if (cstmr.id==id_) {
+                if (cstmr.fund >= amount) {
+                    cstmr.fund -= amount;
+                    return 0; // Successful
+                } else {
+                    return -1; //Not enough money
+                }
+            }
+        }
+        return -2; //Unknown user id
     }
 }
