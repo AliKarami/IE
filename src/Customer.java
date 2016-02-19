@@ -19,8 +19,11 @@ public class Customer {
 	List<Request> inAct;
 
 	Customer(int id_, String name_, String family_) {
-		id=id_;
-		name=name_;
-		family=family_;
+		id = id_;
+		name = name_;
+		family = family_;
+        int fund = 0;
+        if (id == 1)
+            fund = Integer.MAX_VALUE;
 	}
 }
