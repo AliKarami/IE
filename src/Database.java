@@ -138,4 +138,60 @@ public class Database {
         }
 
     }
+
+    public String buy_gtc(int id_,String name_,int price_,int quantity_) {
+        Customer buyer = get_user(id_);
+        Symbol stock = get_symbol(name_);
+        Request req = new Request(buyer,stock,"GTC",false,quantity_,price_);
+
+        if (buyer == null)
+            return "Unknown user id";
+        else if (buyer.fund < (price_)*(quantity_)) {
+            buyer.refused.add(req);
+            return "Not enough money";
+        }
+        else if (stock == null)
+            return "Invalid symbol id";
+        else {
+            buyer.inAct.add(req);
+            return stock.add_buyReqGTC(req);
+        }
+    }
+
+    public String buy_ioc(int id_,String name_,int price_,int quantity_) {
+        Customer buyer = get_user(id_);
+        Symbol stock = get_symbol(name_);
+        Request req = new Request(buyer,stock,"IOC",false,quantity_,price_);
+
+        if (buyer == null)
+            return "Unknown user id";
+        else if (buyer.fund < (price_)*(quantity_)) {
+            buyer.refused.add(req);
+            return "Not enough money";
+        }
+        else if (stock == null)
+            return "Invalid symbol id";
+        else {
+            return stock.add_buyReqIOC(req);
+        }
+
+    }
+
+    public String buy_mpo(int id_,String name_,int price_,int quantity_) {
+        Customer buyer = get_user(id_);
+        Symbol stock = get_symbol(name_);
+        Request req = new Request(buyer,stock,"MPO",false,quantity_,price_);
+        if (buyer == null)
+            return "Unknown user id";
+        else if (stock.MPO_quantityPrice(quantity_) > buyer.fund) {
+        buyer.refused.add(req);
+        return "Not enough money";
+        }
+        else if (stock == null)
+            return "Invalid symbol id";
+        else {
+            return stock.add_buyReqMPO(req);
+        }
+    }
+
 }

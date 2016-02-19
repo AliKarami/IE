@@ -35,7 +35,24 @@ class Buy extends OrderHandler {
         db = db_;
     }
     public void execute(PrintWriter out) {
-       
+        if (!(params.containsKey("id") && params.containsKey("instrument") && params.containsKey("price") && params.containsKey("quantity") && params.containsKey("type"))) {
+            //pass 404 error...
+            out.println("404 Error!");
+        } else {
+            switch (params.get("type")) {
+                case "GTC":
+                    out.println(db.buy_gtc(Integer.parseInt(params.get("id")),params.get("instrument"),Integer.parseInt(params.get("price")),Integer.parseInt(params.get("quantity"))));
+                    break;
+                case "IOC":
+                    out.println(db.buy_ioc(Integer.parseInt(params.get("id")),params.get("instrument"),Integer.parseInt(params.get("price")),Integer.parseInt(params.get("quantity"))));
+                    break;
+                case "MPO":
+                    out.println(db.buy_mpo(Integer.parseInt(params.get("id")),params.get("instrument"),Integer.parseInt(params.get("price")),Integer.parseInt(params.get("quantity"))));
+                    break;
+                default:
+                    out.println("Invalid type");
+            }
+        }
     }
 }
 
@@ -58,6 +75,8 @@ class Add extends CustomerHandler {
         }
 	}
 }
+
+
 
 class Deposit extends CustomerHandler {
     Deposit(Database db_) {

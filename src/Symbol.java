@@ -86,16 +86,92 @@ public class Symbol {
         }
     }
 
-    public String doDealMPO(Request req_) {
-        int sumQuantity = 0;
-        for (Request buyReq : buyer) {
-        sumQuantity +=buyReq.quantity;
+    public String add_buyReqGTC(Request req_) {
+        buyer.add(req_);
+
+        if (!(req_.equals(buyer.iterator().next())))
+            return "Order is queued";
+        else {
+            StringBuilder sb = new StringBuilder("");
+            while (true) {
+                String current = doDealGTC();
+                if (current.equals("nothing Dealed!"))
+                    break;
+                else {
+                    sb.append(current + "\n");
+                }
+            }
+            String result = sb.toString();
+            if (result.equals(""))
+                return "Order is queued";
+            else
+                return result;
         }
-            if (sumQuantity < req_.quantity)
+    }
+
+    public String add_buyReqIOC(Request req_) {
+        buyer.add(req_);
+
+        if (!(req_.equals(buyer.iterator().next()))) {
+            buyer.remove(req_);
+            req_.cstmr.refused.add(req_);
+            return "Order is declined";
+        }
+        else {
+            String result = doDealIOC();
+            if (result.equals("nothing Dealed!")) {
+                req_.cstmr.refused.add(req_);
+                return "Order is declined";
+            }
+            else {
+                req_.cstmr.done.add(req_);
+                return result;
+            }
+        }
+    }
+
+    public String add_buyReqMPO(Request req_) {
+        if (req_.forSale)
+            req_.price=0;
+        buyer.add(req_);
+
+        String result = doDealMPO(req_);
+        if (result.equals("nothing Dealed!")) {
+            req_.cstmr.refused.add(req_);
+            return "Order is declined";
+        }
+        else {
+            req_.cstmr.done.add(req_);
+            return result;
+        }
+    }
+
+    public int MPO_quantityPrice(int quantity_) {
+        int sumQuantity = 0;
+        int sumPrice = 0;
+        for (Request buyReq : buyer) {
+            if (sumQuantity < (quantity_ + buyReq.quantity)) {
+                sumQuantity += buyReq.quantity;
+                sumPrice += buyReq.price;
+            } else if (sumQuantity < quantity_) {
+                sumPrice += (sumQuantity-quantity_)*buyReq.price;
+                sumQuantity = quantity_;
+            } else if (sumQuantity == quantity_)
+                return sumPrice;
+            else
+                return -1;
+        }
+        return -1;
+    }
+
+    public String doDealMPO(Request req_) {
+            if (MPO_quantityPrice(req_.quantity) == -1)
                 return "nothing Dealed!";
             else {
                 StringBuilder sb = new StringBuilder("");
                 while (true) {
+                    if (!req_.forSale)
+                        req_.price=seller.iterator().next().price;
                     String current = doDealGTC();
                     if (current.equals("nothing Dealed!"))
                         break;
@@ -191,9 +267,4 @@ public class Symbol {
             return "nothing Dealed!";
     }
 
-    public String add_buyReq(Request req_) {
-        buyer.add(req_);
-
-        return "";
-    }
 }
