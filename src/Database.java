@@ -63,10 +63,44 @@ public class Database {
         return null;
     }
 
+    public void add_symbol(String name_) {
+        Symbol newSymbl = new Symbol(name_);
+        symbs.add(newSymbl);
+    }
+
+    public String sell_mpo(int id_,String name_,int price_,int quantity_) {
+        Customer seller = get_user(id_);
+        Symbol stock = get_symbol(name_);
+        Request req = new Request(seller,stock,"MPO",true,quantity_,price_);
+        if (id_ == 1) { //handle admins POWER!!!
+            if (stock == null) {
+                add_symbol(name_);
+            }
+            seller.property.put(name_,quantity_);
+        }
+        if (seller == null)
+            return "Unknown user id";
+        else if (seller.property.get(name_) < quantity_) {
+            seller.refused.add(req);
+            return "Not enough share";
+        }
+        else if (stock == null)
+            return "Invalid symbol id";
+        else {
+            return ""; // <<<<  stock.add_sellReqIOC(req);
+        }
+    }
+
     public String sell_gtc(int id_,String name_,int price_,int quantity_) {
         Customer seller = get_user(id_);
         Symbol stock = get_symbol(name_);
         Request req = new Request(seller,stock,"GTC",true,quantity_,price_);
+        if (id_ == 1) { //handle admins POWER!!!
+            if (stock == null) {
+                add_symbol(name_);
+            }
+            seller.property.put(name_,quantity_);
+        }
         if (seller == null)
             return "Unknown user id";
         else if (seller.property.get(name_) < quantity_) {
@@ -79,5 +113,29 @@ public class Database {
             seller.inAct.add(req);
             return stock.add_sellReqGTC(req);
         }
+    }
+
+    public String sell_ioc(int id_,String name_,int price_,int quantity_) {
+        Customer seller = get_user(id_);
+        Symbol stock = get_symbol(name_);
+        Request req = new Request(seller,stock,"IOC",true,quantity_,price_);
+        if (id_ == 1) { //handle admins POWER!!!
+            if (stock == null) {
+                add_symbol(name_);
+            }
+            seller.property.put(name_,quantity_);
+        }
+        if (seller == null)
+            return "Unknown user id";
+        else if (seller.property.get(name_) < quantity_) {
+            seller.refused.add(req);
+            return "Not enough share";
+        }
+        else if (stock == null)
+            return "Invalid symbol id";
+        else {
+            return stock.add_sellReqIOC(req);
+        }
+
     }
 }

@@ -18,7 +18,7 @@ class Sell extends OrderHandler {
                     out.println(db.sell_gtc(Integer.parseInt(params.get("id")),params.get("instrument"),Integer.parseInt(params.get("price")),Integer.parseInt(params.get("quantity"))));
                     break;
                 case "IOC":
-
+                    out.println(db.sell_ioc(Integer.parseInt(params.get("id")),params.get("instrument"),Integer.parseInt(params.get("price")),Integer.parseInt(params.get("quantity"))));
                     break;
                 case "MPO":
 

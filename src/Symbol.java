@@ -50,6 +50,64 @@ public class Symbol {
         }
     }
 
+    public String add_sellReqIOC(Request req_) {
+        seller.add(req_);
+
+        if (!(req_.equals(seller.iterator().next()))) {
+            seller.remove(req_);
+            req_.cstmr.refused.add(req_);
+            return "Order is declined";
+        }
+        else {
+            String result = doDealIOC();
+            if (result.equals("nothing Dealed!")) {
+                req_.cstmr.refused.add(req_);
+                return "Order is declined";
+            }
+            else {
+                req_.cstmr.done.add(req_);
+                return result;
+            }
+        }
+    }
+
+    public String add_sellReqMPO(Request req_) {
+        req_.price=0;
+        seller.add(req_);
+
+        String result = doDealMPO(req_);
+        if (result.equals("nothing Dealed!")) {
+            req_.cstmr.refused.add(req_);
+            return "Order is declined";
+        }
+        else {
+            req_.cstmr.done.add(req_);
+            return result;
+        }
+    }
+
+    public String doDealMPO(Request req_) {
+        int sumQuantity = 0;
+        for (Request buyReq : buyer) {
+        sumQuantity +=buyReq.quantity;
+        }
+            if (sumQuantity < req_.quantity)
+                return "nothing Dealed!";
+            else {
+                StringBuilder sb = new StringBuilder("");
+                while (true) {
+                    String current = doDealGTC();
+                    if (current.equals("nothing Dealed!"))
+                        break;
+                    else {
+                        sb.append(current + "\n");
+                    }
+                }
+                return sb.toString();
+            }
+
+    }
+
     public String doDealGTC() {
         Request firstBuyReq = buyer.iterator().next();
         Request firstSellReq = seller.iterator().next();
@@ -87,6 +145,50 @@ public class Symbol {
             }
         } else
         return "nothing Dealed!";
+    }
+
+    public String doDealIOC() {
+        Request firstBuyReq = buyer.iterator().next();
+        Request firstSellReq = seller.iterator().next();
+        if (firstBuyReq.price > firstSellReq.price)
+        {
+            if (firstBuyReq.quantity > firstSellReq.quantity) {
+                int moneyExchanged = (firstSellReq.quantity) * (firstBuyReq.price);
+                firstBuyReq.cstmr.fund -= moneyExchanged;
+                firstSellReq.cstmr.fund += moneyExchanged;
+                firstBuyReq.quantity -= firstSellReq.quantity;
+                seller.remove(firstSellReq);
+                firstSellReq.cstmr.done.add(firstSellReq);
+                return firstSellReq.cstmr.id + " sold " + firstSellReq.quantity + " shares of " + firstSellReq.symbl + " @" + firstBuyReq.price + " to " + firstBuyReq.cstmr.id;
+            } else if (firstBuyReq.quantity == firstSellReq.quantity) {
+                int moneyExchanged = (firstSellReq.quantity) * (firstBuyReq.price);
+                firstBuyReq.cstmr.fund -= moneyExchanged;
+                firstSellReq.cstmr.fund += moneyExchanged;
+                buyer.remove(firstBuyReq);
+                seller.remove(firstSellReq);
+                firstBuyReq.cstmr.done.add(firstBuyReq);
+                firstSellReq.cstmr.done.add(firstSellReq);
+                firstBuyReq.cstmr.inAct.remove(firstBuyReq);
+                return firstSellReq.cstmr.id + " sold " + firstSellReq.quantity + " shares of " + firstSellReq.symbl + " @" + firstBuyReq.price + " to " + firstBuyReq.cstmr.id;
+            } else {
+                int sumQuantity = 0;
+                for (Request tmpReq : buyer) {
+                    if (tmpReq.price > firstSellReq.price)
+                        sumQuantity += tmpReq.quantity;
+                }
+                if (sumQuantity > firstSellReq.quantity) {
+                    int moneyExchanged = (firstSellReq.quantity) * (firstBuyReq.price);
+                    firstBuyReq.cstmr.fund -= moneyExchanged;
+                    firstSellReq.cstmr.fund += moneyExchanged;
+                    firstSellReq.quantity -= firstSellReq.quantity;
+                    buyer.remove(firstBuyReq);
+                    firstBuyReq.cstmr.done.add(firstBuyReq);
+                    firstBuyReq.cstmr.inAct.remove(firstBuyReq);
+                    return firstSellReq.cstmr.id + " sold " + firstSellReq.quantity + " shares of " + firstSellReq.symbl + " @" + firstBuyReq.price + " to " + firstBuyReq.cstmr.id;
+                }
+            }
+        }
+            return "nothing Dealed!";
     }
 
     public String add_buyReq(Request req_) {
