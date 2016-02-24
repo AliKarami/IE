@@ -127,7 +127,7 @@ class Deposit extends CustomerHandler {
         }
         else {
 
-            if(params.get("id") == null || params.get("name") == null || params.get("family") == null){
+            if(params.get("id") == null || params.get("amount") == null){
                 out.println("Mismatched parameters");
                 return;
             }
@@ -153,7 +153,7 @@ class Withdraw extends CustomerHandler {
         }
         else {
 
-            if(params.get("id") == null || params.get("name") == null || params.get("family") == null){
+            if(params.get("id") == null || params.get("amount") == null){
                 out.println("Mismatched parameters");
                 return;
             }
