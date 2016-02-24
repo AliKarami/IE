@@ -187,7 +187,7 @@ public class Symbol {
     public String doDealGTC() {
         Request firstBuyReq = buyer.iterator().next();
         Request firstSellReq = seller.iterator().next();
-        if (firstBuyReq.price > firstSellReq.price)
+        if (firstBuyReq.price >= firstSellReq.price)
         {
             if (firstBuyReq.quantity > firstSellReq.quantity) {
                 int moneyExchanged = (firstSellReq.quantity) * (firstBuyReq.price);

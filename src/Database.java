@@ -75,6 +75,7 @@ public class Database {
         if (id_ == 1) { //handle admins POWER!!!
             if (stock == null) {
                 add_symbol(name_);
+                stock = get_symbol(name_);
             }
             seller.property.put(name_,quantity_);
         }
@@ -98,6 +99,7 @@ public class Database {
         if (id_ == 1) { //handle admins POWER!!!
             if (stock == null) {
                 add_symbol(name_);
+                stock = get_symbol(name_);
             }
             seller.property.put(name_,quantity_);
         }
@@ -107,8 +109,9 @@ public class Database {
             seller.refused.add(req);
             return "Not enough share";
         }
-        else if (stock == null)
+        else if (stock == null) {
             return "Invalid symbol id";
+        }
         else {
             seller.inAct.add(req);
             return stock.add_sellReqGTC(req);
@@ -122,6 +125,7 @@ public class Database {
         if (id_ == 1) { //handle admins POWER!!!
             if (stock == null) {
                 add_symbol(name_);
+                stock = get_symbol(name_);
             }
             seller.property.put(name_,quantity_);
         }
@@ -143,7 +147,6 @@ public class Database {
         Customer buyer = get_user(id_);
         Symbol stock = get_symbol(name_);
         Request req = new Request(buyer,stock,"GTC",false,quantity_,price_);
-
         if (buyer == null)
             return "Unknown user id";
         else if (buyer.fund < (price_)*(quantity_)) {
