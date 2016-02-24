@@ -7,7 +7,7 @@ import com.sun.net.httpserver.*;
 public abstract class ServiceHandler implements HttpHandler {
     protected Map<String, String> params;
 
-    private void extractParams(String queryString) {
+    public void extractParams(String queryString) {
         params = new LinkedHashMap<String, String>();
         if (queryString == null || queryString.equals(""))
             return;
