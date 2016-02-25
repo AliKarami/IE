@@ -41,13 +41,13 @@ class Sell extends OrderHandler {
 
             switch (params.get("type")) {
                 case "GTC":
-                    out.println(db.sell_gtc(Integer.parseInt(params.get("id")),params.get("instrument"),Integer.parseInt(params.get("price")),Integer.parseInt(params.get("quantity"))));
+                    out.println(new GTC().Sell(Integer.parseInt(params.get("id")),params.get("instrument"),Integer.parseInt(params.get("price")),Integer.parseInt(params.get("quantity")),db));
                     break;
                 case "IOC":
-                    out.println(db.sell_ioc(Integer.parseInt(params.get("id")),params.get("instrument"),Integer.parseInt(params.get("price")),Integer.parseInt(params.get("quantity"))));
+                    out.println(new IOC().Sell(Integer.parseInt(params.get("id")),params.get("instrument"),Integer.parseInt(params.get("price")),Integer.parseInt(params.get("quantity")),db));
                     break;
                 case "MPO":
-                    out.println(db.sell_mpo(Integer.parseInt(params.get("id")),params.get("instrument"),Integer.parseInt(params.get("price")),Integer.parseInt(params.get("quantity"))));
+                    out.println(new MPO().Sell(Integer.parseInt(params.get("id")),params.get("instrument"),Integer.parseInt(params.get("price")),Integer.parseInt(params.get("quantity")),db));
                     break;
                 default:
                     out.println("Invalid type");
@@ -73,13 +73,13 @@ class Buy extends OrderHandler {
 
             switch (params.get("type")) {
                 case "GTC":
-                    out.println(db.buy_gtc(Integer.parseInt(params.get("id")),params.get("instrument"),Integer.parseInt(params.get("price")),Integer.parseInt(params.get("quantity"))));
+                    out.println(new GTC().Buy(Integer.parseInt(params.get("id")),params.get("instrument"),Integer.parseInt(params.get("price")),Integer.parseInt(params.get("quantity")),db));
                     break;
                 case "IOC":
-                    out.println(db.buy_ioc(Integer.parseInt(params.get("id")),params.get("instrument"),Integer.parseInt(params.get("price")),Integer.parseInt(params.get("quantity"))));
+                    out.println(new IOC().Buy(Integer.parseInt(params.get("id")),params.get("instrument"),Integer.parseInt(params.get("price")),Integer.parseInt(params.get("quantity")),db));
                     break;
                 case "MPO":
-                    out.println(db.buy_mpo(Integer.parseInt(params.get("id")),params.get("instrument"),Integer.parseInt(params.get("price")),Integer.parseInt(params.get("quantity"))));
+                    out.println(new MPO().Buy(Integer.parseInt(params.get("id")),params.get("instrument"),Integer.parseInt(params.get("price")),Integer.parseInt(params.get("quantity")),db));
                     break;
                 default:
                     out.println("Invalid type");
