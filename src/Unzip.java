@@ -8,48 +8,44 @@ import java.util.zip.ZipInputStream;
 
 public class Unzip {
 
-    public static void unzip(String zipFile,String outputPath){
+    public Unzip(String zipFile,String classPath){
+        unzip(zipFile,classPath);
+    }
 
-        if(outputPath == null)
-            outputPath = "";
+    public void unzip(String zipFile,String classPath){
+
+        if(classPath == null)
+            classPath = "";
         else
-            outputPath+=File.separator;
+            classPath += File.separator;
 
-        // 1.0 Create output directory
-        File outputDirectory = new File(outputPath);
+        File classDirectory = new File(classPath);
 
-        if(outputDirectory.exists())
-            outputDirectory.delete();
+        if(classDirectory.exists())
+            classDirectory.delete();
 
-        outputDirectory.mkdir();
-
-        // 2.0 Unzip (create folders & copy files)
+        classDirectory.mkdir();
+        
         try {
-
-            // 2.1 Get zip input stream
+            
             ZipInputStream zip = new ZipInputStream(new FileInputStream(zipFile));
 
             ZipEntry entry = null;
             int len;
             byte[] buffer = new byte[1024];
-
-            // 2.2 Go over each entry "file/folder" in zip file
+            
             while((entry = zip.getNextEntry()) != null){
 
                 if(!entry.isDirectory()){
-                    System.out.println("-"+entry.getName());
-
-                    // create a new file
-                    File file = new File(outputPath +entry.getName());
-
-                    // create file parent directory if does not exist
+                   // System.out.println("-" + entry.getName());
+                    
+                    File file = new File(classPath + entry.getName());
+                    
                     if(!new File(file.getParent()).exists())
                         new File(file.getParent()).mkdirs();
-
-                    // get new file output stream
+                    
                     FileOutputStream fos = new FileOutputStream(file);
 
-                    // copy bytes
                     while ((len = zip.read(buffer)) > 0) {
                         fos.write(buffer, 0, len);
                     }
