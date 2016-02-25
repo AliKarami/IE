@@ -194,6 +194,7 @@ public class CA2 {
 			server.createContext("/customer/add", new Add(db));
 			server.createContext("/customer/deposit", new Deposit(db));
 			server.createContext("/customer/withdraw", new Withdraw(db));
+            server.createContext("/config/uploadzip", new PostHandler());
             server.createContext("/",new ErrorHandler());
 			server.start();
 
