@@ -173,6 +173,14 @@ class Withdraw extends CustomerHandler {
 	}
 }
 
+class PostHandler implements HttpHandler{
+    
+    public void handle(HttpExchange t) throws IOException {
+
+    }
+}
+
+
 
 public class CA2 {
     static Database db = new Database();

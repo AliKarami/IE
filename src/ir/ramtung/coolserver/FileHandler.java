@@ -21,7 +21,7 @@ public class FileHandler implements HttpHandler {
         if (!file.exists()) {
             t.sendResponseHeaders(404, -1);
             return;
-        }    	
+        }
         t.sendResponseHeaders(200, file.length());
         Headers headers = t.getResponseHeaders();
         headers.add("Date", Calendar.getInstance().getTime().toString());
