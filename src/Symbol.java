@@ -13,6 +13,9 @@ public class Symbol {
 		buyer = new PriorityQueue<Request> (1,reqBuyComparator);
 	}
 
+    public  PriorityQueue<Request> getSeller(){return seller;}
+    public  PriorityQueue<Request> getBuyer(){return buyer;}
+
     public Comparator<Request> reqSellComparator = new Comparator<Request>() {
         @Override
         public int compare(Request r1, Request r2) {
