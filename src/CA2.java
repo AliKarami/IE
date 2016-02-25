@@ -114,8 +114,6 @@ class Add extends CustomerHandler {
 	}
 }
 
-
-
 class Deposit extends CustomerHandler {
     Deposit(Database db_) {
         db = db_;
@@ -173,14 +171,36 @@ class Withdraw extends CustomerHandler {
 	}
 }
 
-class PostHandler implements HttpHandler{
-    
-    public void handle(HttpExchange t) throws IOException {
+class PostHandler implements HttpHandler {
 
+    public void handle(HttpExchange t) throws IOException {
+        InputStream is = t.getRequestBody();
+        OutputStream outputStream = null;
+        try {
+            outputStream = new FileOutputStream(new File("./DynamicClass.zip"));
+            int read = 0;
+            byte[] bytes = new byte[1024];
+            while ((read = is.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+            System.out.println("Done!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        new Unzip("./DynamicClass.zip",".");
+        if ((new File ("./DynamicClass.zip")).delete()) {
+            System.out.println("successful reconfiguration"); // khorouji bayad be client ersal shavad na inja!!!!
+        }
     }
 }
-
-
 
 public class CA2 {
     static Database db = new Database();
