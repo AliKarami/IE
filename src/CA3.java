@@ -168,7 +168,7 @@ class Withdraw extends CustomerHandler {
 
 
 
-public class CA2 {
+public class CA3 {
     static Database db = new Database();
 
 	public static void main(String[] args) {
