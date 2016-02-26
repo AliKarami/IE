@@ -6,7 +6,6 @@ public class GTC implements Type {
     public String Sell(int id_, String name_, int price_, int quantity_,Database db_) {
         Customer seller = db_.get_user(id_);
         Symbol stock = db_.get_symbol(name_);
-        //System.err.println("Kosse babaye: " + stock);
         if (id_ == 1) { //handle admins POWER!!!
             if (stock == null) {
                 db_.add_symbol(name_);
@@ -75,7 +74,6 @@ public class GTC implements Type {
     @Override
     public String add_buyReq(Request req_) {
         req_.symbl.getBuyer().add(req_);
-
         if (!(req_.equals(req_.symbl.getBuyer().iterator().next())))
             return "Order is queued";
         else {

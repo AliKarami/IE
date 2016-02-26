@@ -6,7 +6,6 @@ public class IOC implements Type {
     public String Sell(int id_, String name_, int price_, int quantity_,Database db_) {
         Customer seller = db_.get_user(id_);
         Symbol stock = db_.get_symbol(name_);
-        Request req = new Request(seller,stock,"IOC",true,quantity_,price_);
         if (id_ == 1) { //handle admins POWER!!!
             if (stock == null) {
                 db_.add_symbol(name_);
@@ -14,6 +13,7 @@ public class IOC implements Type {
             }
             seller.property.put(name_,quantity_);
         }
+        Request req = new Request(seller,stock,"IOC",true,quantity_,price_);
         if (seller == null)
             return "Unknown user id";
         else if (seller.property.get(name_) < quantity_) {
@@ -93,6 +93,8 @@ public class IOC implements Type {
 
     @Override
     public String doDeal(Request req_) {
+        if (!req_.symbl.getBuyer().iterator().hasNext() || !req_.symbl.getSeller().iterator().hasNext())
+            return "nothing Dealed!";
         Request firstBuyReq = req_.symbl.getBuyer().iterator().next();
         Request firstSellReq = req_.symbl.getSeller().iterator().next();
         if (firstBuyReq.price > firstSellReq.price)

@@ -6,7 +6,6 @@ public class MPO implements Type{
     public String Sell(int id_, String name_, int price_, int quantity_,Database db_) {
         Customer seller = db_.get_user(id_);
         Symbol stock = db_.get_symbol(name_);
-        Request req = new Request(seller,stock,"MPO",true,quantity_,price_);
         if (id_ == 1) { //handle admins POWER!!!
             if (stock == null) {
                 db_.add_symbol(name_);
@@ -14,6 +13,7 @@ public class MPO implements Type{
             }
             seller.property.put(name_,quantity_);
         }
+        Request req = new Request(seller,stock,"MPO",true,quantity_,price_);
         if (seller == null)
             return "Unknown user id";
         else if (seller.property.get(name_) < quantity_) {
@@ -70,6 +70,8 @@ public class MPO implements Type{
     @Override
     public String doDeal(Request req_) {
         if (MPO_quantityPrice(req_.quantity,req_) == -1)
+            return "nothing Dealed!";
+        else if (!req_.symbl.getBuyer().iterator().hasNext() || !req_.symbl.getSeller().iterator().hasNext())
             return "nothing Dealed!";
         else {
             StringBuilder sb = new StringBuilder("");
