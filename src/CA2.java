@@ -3,6 +3,8 @@ import java.net.*;
 import java.util.*;
 import com.sun.net.httpserver.*;
 import ir.ramtung.coolserver.*;
+import java.lang.reflect.*;
+import java.lang.Class.*;
 
 class ErrorHandler extends ServiceHandler{
 
@@ -38,20 +40,25 @@ class Sell extends OrderHandler {
                 out.println("Mismatched parameters");
                 return;
             }
+                switch (params.get("type")) {
+                    case "GTC":
+                        try {
+                            Class GT = Class.forName("GTC");
+                            Object obj = GT.newInstance();
+                            Method sll = GT.getDeclaredMethod("Sell",new Class[] {Integer.TYPE , String.class , Integer.TYPE, Integer.TYPE, Database.class});
+                            out.println(sll.invoke(obj,Integer.parseInt(params.get("id")), params.get("instrument"), Integer.parseInt(params.get("price")), Integer.parseInt(params.get("quantity")), db));
+                        } catch (Exception kir) { System.err.println("kossher"); kir.printStackTrace(); }
+                        break;
+                    case "IOC":
+                        out.println(new IOC().Sell(Integer.parseInt(params.get("id")), params.get("instrument"), Integer.parseInt(params.get("price")), Integer.parseInt(params.get("quantity")), db));
+                        break;
+                    case "MPO":
+                        out.println(new MPO().Sell(Integer.parseInt(params.get("id")), params.get("instrument"), Integer.parseInt(params.get("price")), Integer.parseInt(params.get("quantity")), db));
+                        break;
+                    default:
+                        out.println("Invalid type");
+                }
 
-            switch (params.get("type")) {
-                case "GTC":
-                    out.println(new GTC().Sell(Integer.parseInt(params.get("id")),params.get("instrument"),Integer.parseInt(params.get("price")),Integer.parseInt(params.get("quantity")),db));
-                    break;
-                case "IOC":
-                    out.println(new IOC().Sell(Integer.parseInt(params.get("id")),params.get("instrument"),Integer.parseInt(params.get("price")),Integer.parseInt(params.get("quantity")),db));
-                    break;
-                case "MPO":
-                    out.println(new MPO().Sell(Integer.parseInt(params.get("id")),params.get("instrument"),Integer.parseInt(params.get("price")),Integer.parseInt(params.get("quantity")),db));
-                    break;
-                default:
-                    out.println("Invalid type");
-            }
         }
     }
 }
