@@ -41,9 +41,9 @@ class Sell extends OrderHandler {
             }
             try {
                 String dealType = params.get("type");
-                Class GT = Class.forName(dealType);
-                Object obj = GT.newInstance();
-                Method mtd = GT.getDeclaredMethod("Sell", new Class[]{Integer.TYPE, String.class, Integer.TYPE, Integer.TYPE, Database.class});
+                Class <? extends Type> TypeClass = Class.forName(dealType).asSubclass(Type.class);
+                Object obj = TypeClass.newInstance();
+                Method mtd = TypeClass.getDeclaredMethod("Sell", new Class[]{Integer.TYPE, String.class, Integer.TYPE, Integer.TYPE, Database.class});
                 out.println(mtd.invoke(obj, Integer.parseInt(params.get("id")), params.get("instrument"), Integer.parseInt(params.get("price")), Integer.parseInt(params.get("quantity")), db));
             }catch(Exception ex){
                 //ex.printStackTrace();
@@ -71,9 +71,9 @@ class Buy extends OrderHandler {
 
             try {
                 String dealType = params.get("type");
-                Class GT = Class.forName(dealType);
-                Object obj = GT.newInstance();
-                Method mtd = GT.getDeclaredMethod("Buy", new Class[]{Integer.TYPE, String.class, Integer.TYPE, Integer.TYPE, Database.class});
+                Class <? extends Type> TypeClass = Class.forName(dealType).asSubclass(Type.class);
+                Object obj = TypeClass.newInstance();
+                Method mtd = TypeClass.getDeclaredMethod("Buy", new Class[]{Integer.TYPE, String.class, Integer.TYPE, Integer.TYPE, Database.class});
                 out.println(mtd.invoke(obj, Integer.parseInt(params.get("id")), params.get("instrument"), Integer.parseInt(params.get("price")), Integer.parseInt(params.get("quantity")), db));
             }catch(Exception ex){
                 //ex.printStackTrace();
