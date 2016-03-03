@@ -181,7 +181,7 @@ public class CA3 {
 			server.createContext("/customer/withdraw", new Withdraw(db));
             server.createContext("/config/uploadzip", new PostHandler());
             server.createContext("/index",new MainHandler());
-            server.createContext("/",new ErrorHandler());
+            server.createContext("/",new FileHandler());
 			server.start();
 
 

@@ -19,12 +19,14 @@
 
 #menu {
 	line-height: 30px;
-	text-align: right;
+	text-align: center;
 	background-color: yellow;
 	height: 300px;
 	width: 15%;
 	float: right;
 	padding: 5px;
+	text-shadow: 1px 1px #0fff0f;
+	font-size: 20px;
 }
 
 #main {
@@ -34,10 +36,28 @@
 	padding: 10px;
 }
 
+#frame {
+	width: 100%;
+	height: 100%;
+}
+
+#msg {
+	background-color: green;
+	color: black;
+	text-align: right;
+	padding: 5px;
+}
+
 #footer {
 	background-color: black;
 	color: white;
 	clear: both;
 	text-align: center;
 	padding: 5px;
+}
+
+#signform {
+	text-align: center;
+	color: black;
+	background-color: orange;
 }

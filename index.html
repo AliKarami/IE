@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="style.css"/>
-    <title>bazare bourse</title>
+    <title> $title </title>
 </head>
 <body>
  <div id="top">
@@ -22,13 +22,19 @@
 
  <div id="menu">
 
- <p>this is menu text</p>  
+  <a href="/index.html"> خانه </a> <hr>
+  <a href="/index.html?adr=SignInUp.html&title=ورود"> ورود / عضویت </a> <hr>
+  <a href="/index.html?adr=BuySell.html&title=خرید و فروش"> خرید و فروش </a> <hr>
+  <a href="/index.html?adr=DepositWithdraw&title=مدیریت اعتبار"> مدیریت اعتبار </a> <hr>
+  <a href="/index.html?adr=Status.html&title=وضعیت بازار"> وضعیت بازار </a> <hr>
+
 
  </div>
  <div id="main">
   
-  <p>this is main text</p>
-  <frame src=$adr />
+  <iframe src=$adr id="frame"></iframe>
+
+  <div id="msg">$msg</div>
 
  </div>
  <div id="footer">

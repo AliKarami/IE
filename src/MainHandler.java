@@ -12,13 +12,17 @@ import java.util.Calendar;
 class MainHandler extends ServiceHandler {
 
     public void execute(PrintWriter out){
-        if(params.containsKey("adr"))
+        if(params.containsKey("adr") && params.containsKey("title"))
             new Page("./index.html")
+                .subst("title",params.get("title"))
                 .subst("adr", "\""  + params.get("adr") + "\"" )
+                .subst("msg", "" )
                 .writeTo(out);
         else
             new Page("./index.html")
+                    .subst("title","بازار بورس")
                     .subst("adr","\"" + "\"")
+                    .subst("msg",  "خوش آمدید" )
                     .writeTo(out);
     }
 }
