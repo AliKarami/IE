@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-rm -rf bin/*
+rm -rf bin/*.class
 javac -cp coolserver.jar -sourcepath src -d bin src/*.java
 
 if [ $? -eq 0 ]; then

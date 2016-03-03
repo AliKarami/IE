@@ -167,7 +167,6 @@ class Withdraw extends CustomerHandler {
 }
 
 
-
 public class CA3 {
     static Database db = new Database();
 
@@ -181,6 +180,7 @@ public class CA3 {
 			server.createContext("/customer/deposit", new Deposit(db));
 			server.createContext("/customer/withdraw", new Withdraw(db));
             server.createContext("/config/uploadzip", new PostHandler());
+            server.createContext("/index",new MainHandler());
             server.createContext("/",new ErrorHandler());
 			server.start();
 
