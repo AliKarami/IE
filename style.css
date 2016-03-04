@@ -48,8 +48,13 @@
 	width: 15%;
 	float: right;
 	padding: 5px;
-	text-shadow: 1px 1px #0fff0f;
+	text-shadow: 1px 1px #D4886A;
 	font-size: 20px;
+}
+@media only screen and (max-width: 1030px) {
+#menu {
+	width: 100%;
+}
 }
 
 #main {
@@ -60,10 +65,15 @@
 	float: right;
 	padding: 10px;
 }
+@media only screen and (max-width: 1030px) {
+#main {
+	width: 100%;
+}
+}
 
 #frame {
 	width: 100%;
-	height: 100%;
+	height: 250px;
 }
 
 #msg {
@@ -88,35 +98,41 @@
 }
 
 #buyform {
+	padding-right: 20%;
+	float: right;
 	align-content: center;
 	text-align: center;
 	color: black;
 }
 
 #sellform {
+	padding-left: 20%;
+	float: left;
 	align-content: center;
 	text-align: center;
 	color: black;
 }
 
 #depositform {
+	padding-right: 20%;
+	float: right;
 	align-content: center;
 	text-align: center;
 	color: black;
 }
 
 #withdrawform {
+	padding-left: 20%;
+	float: left;
 	align-content: center;
 	text-align: center;
 	color: black;
 }
 
-#rightform {
-	float: right;
-	align: right;
-}
-
-#leftform {
-	float: left;
-	align: left;
+#statusdiv {
+	align: center;
+	text-align: center;
+	align-content: center;
+	line-height: 250%;
+	background-color: #D5EFFC;
 }

@@ -2,22 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../style.css"/>
     <title></title>
 </head>
 <body>
-<div id="leftform">
 <form id="depositform" method = "GET" action = "/customer/deposit">
-id: <br><input name = "id" type=number> </br>
-amount: <br><input name = "amount" type=number> </br>
+شناسه: <br><input name = "id" type=number> </br>
+مقدار: <br><input name = "amount" type=number> </br>
 </br><input type=submit value="افزایش اعتبار">
 </form>
-</div>
-<div id="rightform">
 <form id="withdrawform" method = "GET" action = "/order/withdraw">
-id: <br><input name = "id" type=number> </br>
-amount: <br><input name = "amount" type=number> </br>
+شناسه: <br><input name = "id" type=number> </br>
+مقدار: <br><input name = "amount" type=number> </br>
 </br><input type=submit value="کاهش اعتبار">
 </form>
-</div>
 </body>
 </html>
