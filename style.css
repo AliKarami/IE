@@ -31,6 +31,8 @@
 
 #main {
 	width: 82%;
+	height: 200px;
+	align-content: center;
 	text-align: center;
 	float: right;
 	padding: 10px;
@@ -57,7 +59,7 @@
 }
 
 #signform {
+	align-content: center;
 	text-align: center;
 	color: black;
-	background-color: orange;
 }
