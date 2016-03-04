@@ -14,21 +14,25 @@ class PostHandler implements HttpHandler {
                 outputStream.write(bytes, 0, read);
             }
         } catch (IOException e) {
-            out.println("Unsuccessful reconfiguration");
+            //out.println("Unsuccessful reconfiguration");
+            PageBuilder.createPage(out,"index.html","بازار بورس","پیغام سیستم:تنظیمات اجرا نشد.");
             e.printStackTrace();
         } finally {
             if (is != null) {
                 try {
                     is.close();
                 } catch (IOException e) {
-                    out.println("Unsuccessful reconfiguration");
+                   // out.println("Unsuccessful reconfiguration");
+                    PageBuilder.createPage(out,"index.html","بازار بورس","پیغام سیستم:تنظیمات اجرا نشد.");
                     e.printStackTrace();
                 }
             }
         }
         new Unzip("./DynamicClass.zip",".");
         if ((new File ("./DynamicClass.zip")).delete()) {
-            out.println("Successful reconfiguration");
+
+            //out.println("Successful reconfiguration");
+            PageBuilder.createPage(out,"index.html","بازار بورس","پیغام سیستم:تنظیمات با موفقیت اعمال شد.");
         }
 
     }

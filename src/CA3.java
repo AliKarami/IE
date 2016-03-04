@@ -48,7 +48,7 @@ class Sell extends OrderHandler {
                 Method mtd = TypeClass.getDeclaredMethod("Sell", new Class[]{Integer.TYPE, String.class, Integer.TYPE, Integer.TYPE, Database.class});
                // out.println(mtd.invoke(obj, Integer.parseInt(params.get("id")), params.get("instrument"), Integer.parseInt(params.get("price")), Integer.parseInt(params.get("quantity")), db));
                 String msg = (String)mtd.invoke(obj,Integer.parseInt(params.get("id")), params.get("instrument"), Integer.parseInt(params.get("price")), Integer.parseInt(params.get("quantity")), db);
-                PageBuilder.createPage(out,"BuySell.html","خرید و فروش سهام",msg);
+                PageBuilder.createPage(out,"index.html","بازار بورس",msg);
             }catch(Exception ex){
                 //ex.printStackTrace();
                 //out.println("Invalid type");
@@ -84,7 +84,7 @@ class Buy extends OrderHandler {
                 Method mtd = TypeClass.getDeclaredMethod("Buy", new Class[]{Integer.TYPE, String.class, Integer.TYPE, Integer.TYPE, Database.class});
                 //out.println(mtd.invoke(obj, Integer.parseInt(params.get("id")), params.get("instrument"), Integer.parseInt(params.get("price")), Integer.parseInt(params.get("quantity")), db));
                 String msg = (String)mtd.invoke(obj,Integer.parseInt(params.get("id")), params.get("instrument"), Integer.parseInt(params.get("price")), Integer.parseInt(params.get("quantity")), db);
-                PageBuilder.createPage(out,"BuySell.html","خرید و فروش سهام",msg);
+                PageBuilder.createPage(out,"index.html","بازار بورس",msg);
             }catch(Exception ex){
                 //ex.printStackTrace();
                 //out.println("Invalid type");
@@ -114,7 +114,7 @@ class Add extends CustomerHandler {
 
             if (db.add_customer(Integer.parseInt(params.get("id")),params.get("name"),params.get("family"))) {
                // out.println("New user is added");
-                PageBuilder.createPage(out,"SignInUp.html","ورود و عضویت","پیغام سیستم:ثبت نام شما با موفقیت انجام شد.");
+                PageBuilder.createPage(out,"index.html","بازار بورس","پیغام سیستم:ثبت نام شما با موفقیت انجام شد.");
             }
             else {
                 //out.println("Repeated id");
@@ -144,7 +144,7 @@ class Deposit extends CustomerHandler {
 
             if (db.deposit_customer(Integer.parseInt(params.get("id")),Integer.parseInt(params.get("amount")))) {
                 //out.println("Successful");
-                PageBuilder.createPage(out,"DepositWithdraw.html","مدیریت اعتبار","پیغام سیستم:حساب شما با موفقیت شارژ شد.");
+                PageBuilder.createPage(out,"index.html","بازار بورس","پیغام سیستم:حساب شما با موفقیت شارژ شد.");
             }
             else {
                 //out.println("Unknown user id");
@@ -175,7 +175,7 @@ class Withdraw extends CustomerHandler {
             switch (db.withdraw_customer(Integer.parseInt(params.get("id")),Integer.parseInt(params.get("amount")))) {
                 case 0:
                    // out.println("Successful");
-                    PageBuilder.createPage(out,"DepositWithdraw.html","مدیریت اعتبار","پیغام سیستم:پول از حساب شما با موفقیت برداشت شد.");
+                    PageBuilder.createPage(out,"index.html","بازار بورس","پیغام سیستم:پول از حساب شما با موفقیت برداشت شد.");
                     break;
                 case -1:
                    // out.println("Not enough money");
