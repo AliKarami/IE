@@ -2,9 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title></title>
 </head>
 <body>
-
+<div id="msg">$msg</div>
+<div id="leftform">
+<form id="buyform" method = "GET" action = "/order/buy">
+id: <br><input name = "id" type=number> </br>
+instrument: <br><input name = "instrument" type=text> </br>
+price: <br><input name = "price" type=number> </br>
+quantity: <br><input name = "quantity" type=number> </br>
+type: <br><input name = "type" type=text> </br>
+</br><input type=submit value="خرید">
+</form>
+</div>
+<div id="rightform">
+<form id="sellform" method = "GET" action = "/order/sell">
+id: <br><input name = "id" type=number> </br>
+instrument: <br><input name = "instrument" type=text> </br>
+price: <br><input name = "price" type=number> </br>
+quantity: <br><input name = "quantity" type=number> </br>
+type: <br><input name = "type" type=text> </br>
+</br><input type=submit value="فروش">
+</form>
+</div>
 </body>
 </html>

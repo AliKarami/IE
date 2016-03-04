@@ -10,11 +10,34 @@
 	float: right;
 	width: 10%;
 	text-align: right;
+	}
+
+#logo img {
+	height: 11%;
+	width : 8%;
+	position: absolute;
+	top: 0;
+	right: 0;
+    opacity: 1;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    -ms-transition: opacity 1s ease-in-out;    
+    transition: opacity 1s ease-in-out;
 }
+
+#logo img.top:hover {
+	opacity: 0;
+}
+
 
 #logoimg {
 	height: 100%;
 	width: 48%;
+}
+#strike {
+	height: 90%;
+	width: 38%;
 }
 
 #menu {
@@ -62,4 +85,38 @@
 	align-content: center;
 	text-align: center;
 	color: black;
+}
+
+#buyform {
+	align-content: center;
+	text-align: center;
+	color: black;
+}
+
+#sellform {
+	align-content: center;
+	text-align: center;
+	color: black;
+}
+
+#depositform {
+	align-content: center;
+	text-align: center;
+	color: black;
+}
+
+#withdrawform {
+	align-content: center;
+	text-align: center;
+	color: black;
+}
+
+#rightform {
+	float: right;
+	align: right;
+}
+
+#leftform {
+	float: left;
+	align: left;
 }
