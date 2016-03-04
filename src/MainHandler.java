@@ -13,8 +13,8 @@ class MainHandler extends ServiceHandler {
 
     public void execute(PrintWriter out){
         if(params.containsKey("adr") && params.containsKey("title"))
-            PageBuilder.createPage(out,params.get("adr"),params.get("title"),"");
+            PageBuilder.createPage(out,"index.html",params.get("adr"),params.get("title"),"");
         else
-            PageBuilder.createPage(out,"","بازار بورس","خوش آمدید");
+            PageBuilder.createPage(out,"index.html","","بازار بورس","خوش آمدید");
     }
 }

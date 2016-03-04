@@ -15,7 +15,7 @@ class PostHandler implements HttpHandler {
             }
         } catch (IOException e) {
             //out.println("Unsuccessful reconfiguration");
-            PageBuilder.createPage(out,"","بازار بورس","پیغام سیستم:تنظیمات اجرا نشد.");
+            PageBuilder.createPage(out,"index.html","","بازار بورس","پیغام سیستم:تنظیمات اجرا نشد.");
             e.printStackTrace();
         } finally {
             if (is != null) {
@@ -23,7 +23,7 @@ class PostHandler implements HttpHandler {
                     is.close();
                 } catch (IOException e) {
                    // out.println("Unsuccessful reconfiguration");
-                    PageBuilder.createPage(out,"","بازار بورس","پیغام سیستم:تنظیمات اجرا نشد.");
+                    PageBuilder.createPage(out,"index.html","","بازار بورس","پیغام سیستم:تنظیمات اجرا نشد.");
                     e.printStackTrace();
                 }
             }
@@ -32,7 +32,7 @@ class PostHandler implements HttpHandler {
         if ((new File ("./DynamicClass.zip")).delete()) {
 
             //out.println("Successful reconfiguration");
-            PageBuilder.createPage(out,"","بازار بورس","پیغام سیستم:تنظیمات با موفقیت اعمال شد.");
+            PageBuilder.createPage(out,"index.html","","بازار بورس","پیغام سیستم:تنظیمات با موفقیت اعمال شد.");
         }
 
     }

@@ -33,12 +33,12 @@ class Sell extends OrderHandler {
         if (!(params.containsKey("id") && params.containsKey("instrument") && params.containsKey("price") && params.containsKey("quantity") && params.containsKey("type"))) {
             //pass 404 error...
             //out.println("Mismatched parameters");
-            PageBuilder.createPage(out,"BuySell.html","خرید و فروش سهام","پیغام سیستم:اشکال در ورودی.");
+            PageBuilder.createPage(out,"BuySell.html","","خرید و فروش سهام","پیغام سیستم:اشکال در ورودی.");
         } else {
 
-            if(params.get("id") == null || params.get("instrument") == null || params.get("price") == null ||params.get("quantity") == null){
+            if(params.get("id").equals("") || params.get("instrument").equals("") || params.get("price").equals("") ||params.get("quantity").equals("")){
                 //out.println("Mismatched parameters");
-                PageBuilder.createPage(out,"BuySell.html","خرید و فروش سهام","پیغام سیستم:تمام فیلد ها را پر کنید.");
+                PageBuilder.createPage(out,"BuySell.html","","خرید و فروش سهام","پیغام سیستم:تمام فیلد ها را پر کنید.");
                 return;
             }
             try {
@@ -48,11 +48,11 @@ class Sell extends OrderHandler {
                 Method mtd = TypeClass.getDeclaredMethod("Sell", new Class[]{Integer.TYPE, String.class, Integer.TYPE, Integer.TYPE, Database.class});
                // out.println(mtd.invoke(obj, Integer.parseInt(params.get("id")), params.get("instrument"), Integer.parseInt(params.get("price")), Integer.parseInt(params.get("quantity")), db));
                 String msg = (String)mtd.invoke(obj,Integer.parseInt(params.get("id")), params.get("instrument"), Integer.parseInt(params.get("price")), Integer.parseInt(params.get("quantity")), db);
-                PageBuilder.createPage(out,"","بازار بورس",msg);
+                PageBuilder.createPage(out,"BuySell.html","","بازار بورس",msg);
             }catch(Exception ex){
                 //ex.printStackTrace();
                 //out.println("Invalid type");
-                PageBuilder.createPage(out,"BuySell.html","خرید و فروش سهام","پیغام سیستم:این نوع از خرید و فروش تعریف نشده است.");
+                PageBuilder.createPage(out,"BuySell.html","","خرید و فروش سهام","پیغام سیستم:این نوع از خرید و فروش تعریف نشده است.");
             }
 
         }
@@ -67,13 +67,13 @@ class Buy extends OrderHandler {
         if (!(params.containsKey("id") && params.containsKey("instrument") && params.containsKey("price") && params.containsKey("quantity") && params.containsKey("type"))) {
             //pass 404 error...
             //out.println("Mismatched parameters");
-            PageBuilder.createPage(out,"BuySell.html","خرید و فروش سهام","پیغام سیستم:اشکال در ورودی.");
+            PageBuilder.createPage(out,"BuySell.html","","خرید و فروش سهام","پیغام سیستم:اشکال در ورودی.");
 
         } else {
 
-            if(params.get("id") == null || params.get("instrument") == null || params.get("price") == null ||params.get("quantity") == null){
+            if(params.get("id").equals("") || params.get("instrument").equals("") || params.get("price").equals("") ||params.get("quantity").equals("")){
                 //out.println("Mismatched parameters");
-                PageBuilder.createPage(out,"BuySell.html","خرید و فروش سهام","پیغام سیستم:تمام فیلد ها را پر کنید.");
+                PageBuilder.createPage(out,"BuySell.html","","خرید و فروش سهام","پیغام سیستم:تمام فیلد ها را پر کنید.");
                 return;
             }
 
@@ -84,11 +84,11 @@ class Buy extends OrderHandler {
                 Method mtd = TypeClass.getDeclaredMethod("Buy", new Class[]{Integer.TYPE, String.class, Integer.TYPE, Integer.TYPE, Database.class});
                 //out.println(mtd.invoke(obj, Integer.parseInt(params.get("id")), params.get("instrument"), Integer.parseInt(params.get("price")), Integer.parseInt(params.get("quantity")), db));
                 String msg = (String)mtd.invoke(obj,Integer.parseInt(params.get("id")), params.get("instrument"), Integer.parseInt(params.get("price")), Integer.parseInt(params.get("quantity")), db);
-                PageBuilder.createPage(out,"","بازار بورس",msg);
+                PageBuilder.createPage(out,"BuySell.html","","بازار بورس",msg);
             }catch(Exception ex){
                 //ex.printStackTrace();
                 //out.println("Invalid type");
-                PageBuilder.createPage(out,"BuySell.html","خرید و فروش سهام","پیغام سیستم:این نوع از خرید و فروش تعریف نشده است.");
+                PageBuilder.createPage(out,"BuySell.html","","خرید و فروش سهام","پیغام سیستم:این نوع از خرید و فروش تعریف نشده است.");
             }
         }
     }
@@ -102,23 +102,23 @@ class Add extends CustomerHandler {
         if ( !(params.containsKey("id") && params.containsKey("name") && params.containsKey("family"))) {
             //pass 404 error...
             //out.println("Mismatched parameters");
-            PageBuilder.createPage(out,"SignInUp.html","ورود و عضویت","پیغام سیستم:اشکال در ورودی.");
+            PageBuilder.createPage(out,"SignInUp.html","","ورود و عضویت","پیغام سیستم:اشکال در ورودی.");
         }
         else {
 
-            if(params.get("id") == null || params.get("name") == null || params.get("family") == null){
+            if(params.get("id").equals("") || params.get("name").equals("") || params.get("family").equals("")){
                 //out.println("Mismatched parameters");
-                PageBuilder.createPage(out,"SignInUp.html","ورود و عضویت","پیغام سیستم:تمام فیلد ها را پر کنید.");
+                PageBuilder.createPage(out,"SignInUp.html","","ورود و عضویت","پیغام سیستم:تمام فیلد ها را پر کنید.");
                 return;
             }
 
             if (db.add_customer(Integer.parseInt(params.get("id")),params.get("name"),params.get("family"))) {
                // out.println("New user is added");
-                PageBuilder.createPage(out,"","بازار بورس","پیغام سیستم:ثبت نام شما با موفقیت انجام شد.");
+                PageBuilder.createPage(out,"SignInUp.html","","بازار بورس","پیغام سیستم:ثبت نام شما با موفقیت انجام شد.");
             }
             else {
                 //out.println("Repeated id");
-                PageBuilder.createPage(out,"SignInUp.html","ورود و عضویت","پیغام سیستم:نام کاربری شما قبلا ثبت شده است.");
+                PageBuilder.createPage(out,"SignInUp.html","","ورود و عضویت","پیغام سیستم:نام کاربری شما قبلا ثبت شده است.");
             }
         }
 	}
@@ -132,23 +132,23 @@ class Deposit extends CustomerHandler {
         if (!(params.containsKey("id") && params.containsKey("amount"))) {
             //pass 404 error...
            //out.println("Mismatched parameters");
-            PageBuilder.createPage(out,"DepositWithdraw.html","مدیریت اعتبار","پیغام سیستم:اشکال در ورودی.");
+            PageBuilder.createPage(out,"DepositWithdraw.html","","مدیریت اعتبار","پیغام سیستم:اشکال در ورودی.");
         }
         else {
 
-            if(params.get("id") == null || params.get("amount") == null){
+            if(params.get("id").equals("") || params.get("amount").equals("")){
                // out.println("Mismatched parameters");
-                PageBuilder.createPage(out,"DepositWithdraw.html","مدیریت اعتبار","پیغام سیستم:تمام فیلد ها را پر کنید.");
+                PageBuilder.createPage(out,"DepositWithdraw.html","","مدیریت اعتبار","پیغام سیستم:تمام فیلد ها را پر کنید.");
                 return;
             }
 
             if (db.deposit_customer(Integer.parseInt(params.get("id")),Integer.parseInt(params.get("amount")))) {
                 //out.println("Successful");
-                PageBuilder.createPage(out,"","بازار بورس","پیغام سیستم:حساب شما با موفقیت شارژ شد.");
+                PageBuilder.createPage(out,"DepositWithdraw.html","","بازار بورس","پیغام سیستم:حساب شما با موفقیت شارژ شد.");
             }
             else {
                 //out.println("Unknown user id");
-               ; PageBuilder.createPage(out,"DepositWithdraw.html","مدیریت اعتبار","پیغام سیستم:نام کاربری اشتباه است.");
+               ; PageBuilder.createPage(out,"DepositWithdraw.html","","مدیریت اعتبار","پیغام سیستم:نام کاربری اشتباه است.");
             }
         }
 	}
@@ -162,28 +162,28 @@ class Withdraw extends CustomerHandler {
         if (!(params.containsKey("id") && params.containsKey("amount"))) {
             //pass 404 error...
             //out.println("Mismatched parameters");
-            PageBuilder.createPage(out,"DepositWithdraw.html","مدیریت اعتبار","پیغام سیستم:اشکال در ورودی.");
+            PageBuilder.createPage(out,"DepositWithdraw.html","","مدیریت اعتبار","پیغام سیستم:اشکال در ورودی.");
         }
         else {
 
-            if(params.get("id") == null || params.get("amount") == null){
+            if(params.get("id").equals("") || params.get("amount").equals("")){
                // out.println("Mismatched parameters");
-                PageBuilder.createPage(out,"DepositWithdraw.html","مدیریت اعتبار","پیغام سیستم:تمام فیلدها را پر کنید.");
+                PageBuilder.createPage(out,"DepositWithdraw.html","","مدیریت اعتبار","پیغام سیستم:تمام فیلدها را پر کنید.");
                 return;
             }
 
             switch (db.withdraw_customer(Integer.parseInt(params.get("id")),Integer.parseInt(params.get("amount")))) {
                 case 0:
                    // out.println("Successful");
-                    PageBuilder.createPage(out,"","بازار بورس","پیغام سیستم:پول از حساب شما با موفقیت برداشت شد.");
+                    PageBuilder.createPage(out,"DepositWithdraw.html","","بازار بورس","پیغام سیستم:پول از حساب شما با موفقیت برداشت شد.");
                     break;
                 case -1:
                    // out.println("Not enough money");
-                    PageBuilder.createPage(out,"DepositWithdraw.html","مدیریت اعتبار","پیغام سیستم:موجودی کافی نیست.");
+                    PageBuilder.createPage(out,"DepositWithdraw.html","","مدیریت اعتبار","پیغام سیستم:موجودی کافی نیست.");
                     break;
                 case -2:
                    // out.println("Unknown user id");
-                    PageBuilder.createPage(out,"DepositWithdraw.html","مدیریت اعتبار","پیغام سیستم:نام کاربری اشتباه است.");
+                    PageBuilder.createPage(out,"DepositWithdraw.html","","مدیریت اعتبار","پیغام سیستم:نام کاربری اشتباه است.");
                     break;
             }
         }
